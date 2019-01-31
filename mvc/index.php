@@ -1,22 +1,31 @@
 <?php
-//define base path, root path of our application
+
+//base root path of application
 define('BP', __DIR__ . '/');
-//enable error_reporting to see php errors
+
+//enablig to se php errors
 error_reporting(E_ALL);
-ini_set('display_errors', 1);
-//set include path, this is where included classes will be found
-$includePaths = implode(PATH_SEPARATOR, array(
+ini_set('display_errors',1);
+
+//path were included classes would be find
+$includePaths = implode(PATH_SEPARATOR, [
     BP . 'app/model',
-    BP . 'app/controller',
-));
-//  var_dump($includePaths);
+    BP . 'app/controller'
+]);
+
 set_include_path($includePaths);
-//register autoloader, to auto-include classes when needed
-spl_autoload_register(function ($class) {
-    //echo $class . "<br />";
+
+//register autoloader, to auto include classes when needed
+spl_autoload_register(function($class)
+{
+
     $classPath = strtr($class, '\\', DIRECTORY_SEPARATOR) . '.php';
-    //echo $classPath;
-    return include $classPath;
+
+    if(file_exists(BP . 'app/model/' . $classPath) || file_exists(BP . 'app/controller/' . $classPath)) {
+        return include $classPath;
+    }
+
 });
-//start app
+
 App::start();
+

@@ -1,9 +1,11 @@
 <?php
+
 class View
 {
+
     private $layout;
 
-    public function __construct($layout = "layout")
+    public function __construct($layout = 'layout')
     {
         $this->layout = basename($layout);
     }
@@ -11,7 +13,7 @@ class View
     public function render($name, $args = [])
     {
         /**
-         * First, we need to "render" {view}.phtml and capture its output
+         *  First, we need to "render" {view}.phtml and capture its output
          */
         ob_start();
         extract($args);
@@ -20,6 +22,7 @@ class View
         /**
          * Then, we render {layout}.phtml and pass view output as $content
          */
+
         if ($this->layout) {
             include BP . "app/view/{$this->layout}.phtml";
         } else {

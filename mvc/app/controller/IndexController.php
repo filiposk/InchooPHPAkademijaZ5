@@ -1,13 +1,15 @@
 <?php
+
 class IndexController
 {
     public function index()
     {
         $view = new View();
         $posts = [
-            'First Post',
-            'Second Post'
+            'First post',
+            'Second post'
         ];
+
         $view->render('index', [
             "posts" => $posts
         ]);

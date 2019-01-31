@@ -1,15 +1,22 @@
 <?php
 
+/**
+ * Class Request handles every request
+ */
 class Request
 {
+    /**
+     * Resolves path info from $_SERVER to use with mod rewrite
+     *
+     * @return string
+     */
     public static function pathInfo()
     {
-        if(isset($_SERVER['PATH_INFO']))
-        {
+        if (isset($_SERVER['PATH_INFO'])) {
             return $_SERVER['PATH_INFO'];
-        }elseif(isset($_SERVER['PATH_INFO'])){
-            return $_SERVER['PATH_INFO'];
-        }else{
+        } elseif (isset($_SERVER['REDIRECT_PATH_INFO'])) {
+            return $_SERVER['REDIRECT_PATH_INFO'];
+        } else {
             return '';
         }
     }
